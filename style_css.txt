@@ -1,0 +1,54 @@
+/*@import url("reset.css");*/
+@import url("https://fonts.googleapis.com/css?family=Droid+Serif|Share+Tech+Mono");
+
+body {
+    font-family: "Droid Serif", sans-serif;
+    font-size: 13pt;
+    background-color: white;
+
+}
+table {
+  width: 2px;
+  padding-right: 50px;
+
+
+}
+
+button {
+  margin: 40px 30px;
+}
+
+a, strong, em {
+    color: #0099ff;
+}
+form {
+border: 2px solid black;
+}
+p.info,
+#login p {
+    width: 80%;
+    margin: 1vw auto;
+}
+bur {
+   background-color: black;
+  /* width: 800px */
+}
+.classname {
+  color: #ff5500;
+  background-image: url("https://img.static-bookatable.com/fotografiska-restaurang-sodermalm-stockholm-2.jpg?id=e078fa18-7bd9-437f-a350-f5d6da7b5dc3.jpg&404=bat2/404-restaurant.jpg&width=600&height=400&scale=both&mode=crop")
+
+}
+.burgaretxt{
+  color: black;
+}
+
+#idname {
+  text-transform: uppercase;
+}
+#lactose {
+  font-weight: bold;
+}
+
+button:hover{
+  background-color: black;
+}

@@ -1,0 +1,71 @@
+
+
+
+function MenuItem(name ,kcal, special, imglink){
+  this.burgername = name;
+  this.kcal = kcal;
+  this.special= special;
+  this.image = imglink;
+}
+
+var B1 = new MenuItem("Halloumi", "1000", "gluten", "https://res.cloudinary.com/coopsverige/image/upload/w_400,h_400/v1521205971/281117.jpg");
+var B2 = new MenuItem("Nöt", "1500", "laktos", "https://www.ungaaktiesparare.se/sites/default/files/styles/full_width/public/aktiviteter/facebook_event_994658054001814.jpg?itok=mkdK1GKk");
+var B3 = new MenuItem("Kyckling", "2000", "ägg", "https://files.cafe.se/uploads/fly-images/123845/burgare-avokado-max-900x473.jpg");
+var B4 = new MenuItem("Veganskt", "2500", "Gluten", "http://recept.se/sites/default/files/styles/recipe-large/public/hardees_memphisbbq1.jpg?itok=4DIChS8N");
+var B5 = new MenuItem("Kalkon", "2600", "ägg", "http://www.ellematovin.se/wp-content/uploads/max-hamburgare-vegetarisk-crispy-mexican.jpg");
+
+var Burgers = [B1 , B2 , B3, B4, B5];
+'use strict';
+var socket = io();
+ vm = new Vue({
+  el: "#DEVdiv",
+  data: {
+    items: Burgers,
+    checkedNames: [] ,
+    selected: '' ,
+    orders: {},
+    firstname: [],
+  },
+  created: function () {
+    socket.on('initialize', function (data) {
+      this.orders = data.orders;
+    }.bind(this));
+
+    socket.on('currentQueue', function (data) {
+      this.orders = data.orders;
+    }.bind(this));
+  },
+    methods: {
+      getNext: function () {
+        var lastOrder = Object.keys(this.orders).reduce(function (last, next) {
+          return Math.max(last, next);
+        }, 0);
+        return lastOrder + 1;
+      },
+      addOrder: function (event) {
+        var offset = {x: event.currentTarget.getBoundingClientRect().left,
+                      y: event.currentTarget.getBoundingClientRect().top};
+        socket.emit("addOrder", { orderId: this.getNext(),
+                                  details: { x: event.clientX - 10 - offset.x,
+                                             y: event.clientY - 10 - offset.y },
+                                  orderItems: this.checkedNames
+                                });
+      },
+
+      }
+
+
+
+})
+
+
+
+
+new Vue({
+    el: '#orders',
+    methods: {
+        markdone: function(messege) {
+          alert(messege)
+        }
+    }
+});

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css" defer>
+	<title>DELI-VERY</title>
+		<script src="https://vuejs.org/js/vue.js" defer></script>
+	<script src="/socket.io/socket.io.js" defer></script>
+		<script src="/vue/vue.js" defer></script>
+
+	<script type="text/javascript" src="menu.js"></script>
+	<script src="js/js_script.js" defer></script>
+	<script src="js/vue_script.js" defer></script>
+	<link rel="stylesheet" href="css/deli-very.css">
+
+
+
+</meta>
+
+
+</head>
+<body>
+
+	<main>
+
+
+
+		<section class="classname">
+			<h1>Välkommen till BurgerOnline <span id="idname"> </span> </h1>
+			<ur> Vi har de basta burgarna </ur>
+		</section>
+
+
+
+
+		<div id="DEVdiv">
+				<div style="display: flex; justify-content: space-between;">
+
+			<div v-for='burger in items' >
+				<table>
+
+						<div class="burgaretxt">
+							<h1></h1>
+
+								<div>
+									<p>{{burger.burgername}}</p>
+									<img :src= "burger.image" alt="hej" title="en annan burgare" width="100" height="100">
+									<p></p>
+									<ol>
+										<li>{{burger.kcal}} kcal </li>
+										<li>Contains <span id="lactose">{{burger.special}} </span></li>
+										add to order
+										<input type="checkbox" id= 'checkbox' :value= "burger.burgername" v-model= "checkedNames" >
+									</ol>
+								</div>
+
+
+
+
+							</div>
+							</table>
+						</div>
+
+
+			</div>
+
+
+
+
+
+			<section id="contact">
+
+				<form>
+
+					<p>This is where you provide necessary information</p>
+
+					<p>
+						<label for="firstname" > Full name</label><br>
+						<input type="text" id="firstname" name="fn" required="required" placeholder="First- and Last name" type="text">
+					</p>
+					<p>
+						<label for="email">E-mail</label><br>
+						<input type="text" id="email" name="em" required="required" placeholder="E-mail address" type="email">
+					</p>
+					<!--<input v-model="message" placeholder="edit me">-->
+				</form>
+			</section>
+		</div>
+		<p>
+			<label for="recipient">Payment</label><br>
+			<select id="recipient" name="rcp">
+				<option>Paypal</option>
+				<option>Natura</option>
+				<option>Swish</option>
+				<option>Kontant</option>
+				<option>Mastercard</option>
+			</select>
+		</p>
+
+		<body>
+		  <h1> Please indicate point of delivery </h1>
+		  <a href="/dispatcher" target="_blank">Open dispatcher in new window</a>.
+		  <div class="view-box">
+		    <div id="dots" v-on:click="addOrder">
+		        <div
+		          v-for="(order, key) in orders"
+		          v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}">
+		          {{key}}
+							#{{key}}: {{order.orderItems.join(", ")}}
+		        </div>
+		    </div>
+		  </div>
+		</body>
+
+
+
+		<form action="">
+			<label for="recipient">Gender</label><br>
+			<input type="radio" name="gender" value="Male"> Male<br>
+			<input type="radio" name="gender" value="Female"> Female<br>
+			<input type="radio" name="gender" value="Non-binary"> Non-binary<br>
+			<input type="radio" name="gender" value="Undisclosed"> Undisclosed
+		</form>
+
+
+
+		<p id="orders">
+			<button type="submit" v-on:click="markdone('button clicked!')" > <img src="http://user.it.uu.se/~mikla253/lab/static/1md034/img/html/image_button.png">
+
+			</button>
+		</p>
+
+
+
+
+
+<div> Order summary
+
+	<p> {{firstname}} </p>
+</div>
+<span>Checked names: {{checkedNames}}</span>
+<!--<span>Checked names: {{checkedNames}} {{orderItems}}</span>-->
+<span>Checked names: {{ checkedNames }}</span>
+</div>
+
+</main>
+	</body>
+	<footer>
+		burgers Inc </footer>
+</html>
